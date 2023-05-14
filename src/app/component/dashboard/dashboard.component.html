@@ -1,0 +1,117 @@
+<!-- SIDEBAR  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />{{ fullName }}
+        <button
+          class="btn btn-outline-success"
+          type="submit"
+          (click)="logout()"
+        >
+          Log Out
+        </button>
+      </form>
+    </div>
+  </div>-->
+<section id="sidebar" [ngClass]="status ? 'hide' : ''">
+  <app-sidebar></app-sidebar>
+</section>
+<!-- SIDEBAR -->
+<!-- CONTENT -->
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <span>
+      <i
+        style="font-size: 30px; color: #6bca77; padding-left: 9px"
+        (click)="addToggle()"
+        class="bx bx-{{ arrow }}-arrow-circle"
+      ></i
+    ></span>
+    <a class="nav-link">Categories</a>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search..." />
+        <button type="button" class="search-btn">
+          <i class="bx bx-search"></i>
+        </button>
+      </div>
+    </form>
+    <a href="#" class="notification">
+      <i class="bx bxs-bell"></i>
+      <span class="num">8</span>
+    </a>
+
+    <a
+      class="profile dropdown-toggle"
+      role="button"
+      id="dropdownMenuLink"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {{ fullName }}
+      <img src="../../../../assets/img/profile.png" />
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li>
+        <a class="dropdown-item" [routerLink]="['/dashboard/profile']"
+          >Profile</a
+        >
+      </li>
+      <li><a class="dropdown-item" href="#">Manage</a></li>
+      <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+    </ul>
+  </nav>
+  <!-- NAVBAR -->
+  <!-- MAIN -->
+  <main>
+    <!-- <div class="head-title">
+      <div class="left">
+        <h1>Dashboard</h1>
+        <ul class="breadcrumb">
+          <li>
+            <a href="#">Dashboard</a>
+          </li>
+          <li><i class="bx bx-chevron-right"></i></li>
+          <li>
+            <a class="active" href="#">Home</a>
+          </li>
+        </ul>
+      </div>
+      <a href="#" class="btn-download">
+        <i class="bx bxs-cloud-download"></i>
+        <span class="text">Download PDF</span>
+      </a>
+    </div> -->
+    <router-outlet></router-outlet>
+  </main>
+  <!-- MAIN -->
+</section>
+<!-- CONTENT -->
