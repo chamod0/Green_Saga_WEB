@@ -1,0 +1,148 @@
+<div class="containe">
+  <a href="" target="_blank" class="icon-link">
+    <img src="../../../assets/img/logo.png" /><img
+      style="width: 130px"
+      src="../../../assets/img/TEXT logo.png"
+    />
+  </a>
+  <div class="image-containe{{ imgchange }}">
+    <div class="img">
+      <div class="img__text">
+        <h2>Hello,</h2>
+        <p>
+          Create Your Profile<br />
+          and start journey with us.
+        </p>
+      </div>
+      <div class="btnlo">
+        <button
+          style="top: 20px; left: 220px"
+          routerLink="/login"
+          class="btn btn--ghost"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-containe">
+    <div class="form sign-in">
+      <h1>SignUp</h1>
+      <form [formGroup]="signUpForm">
+        <div class="labeltext">
+          <label>
+            <span>User Name</span>
+
+            <input formControlName="userName" type="text" />
+            <small
+              *ngIf="
+                signUpForm.controls['userName'].dirty &&
+                signUpForm.hasError('required', 'userName')
+              "
+              class="text-danger"
+              >*user name is requerd</small
+            >
+          </label>
+          <label>
+            <span>Email</span>
+
+            <input formControlName="email" type="email" />
+            <small
+              *ngIf="
+                signUpForm.controls['email'].dirty &&
+                signUpForm.hasError('required', 'email')
+              "
+              class="text-danger"
+              >*email is requerd</small
+            >
+          </label>
+          <label>
+            <span>first Name</span>
+
+            <input formControlName="firstName" type="firstName" />
+            <small
+              *ngIf="
+                signUpForm.controls['firstName'].dirty &&
+                signUpForm.hasError('required', 'firstName')
+              "
+              class="text-danger"
+              >*Firdt name is requerd</small
+            >
+          </label>
+          <label>
+            <span>last Name</span>
+
+            <input formControlName="lastName" type="lastName" />
+            <small
+              *ngIf="
+                signUpForm.controls['lastName'].dirty &&
+                signUpForm.hasError('required', 'lastName')
+              "
+              class="text-danger"
+              >*Last name is requerd</small
+            >
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input formControlName="password" [type]="type" />
+            <span (click)="hideShowPass()" class="fa {{ eyeIcon }}"></span>
+            <small
+              *ngIf="
+                signUpForm.controls['password'].dirty &&
+                signUpForm.hasError('required', 'password')
+              "
+              class="text-danger"
+              >*Password is requerd</small
+            > </label
+          ><br /><br />
+        </div>
+        <span>Register as a</span><br />
+        <label>
+          Farmer
+          <input
+            formControlName="role"
+            type="radio"
+            name="role"
+            value="Farmer"
+            (click)="imgChange('Farmer')"
+            checked
+          />
+          <img
+            style="width: 30px"
+            src="../../../assets/img/farmer.png"
+            alt="Option 1"
+          />
+        </label>
+
+        <label>
+          Supervisor
+          <input
+            formControlName="role"
+            type="radio"
+            name="role"
+            value="supervisor"
+            (click)="imgChange('Sup')"
+          />
+          <img
+            style="width: 30px"
+            src="../../../assets/img/supervisor.png"
+            alt="Option 2"
+          />
+        </label>
+        <span></span>
+
+        <button
+          style="padding: 0.5em 12em"
+          type="button"
+          (click)="onSubmit()"
+          class="btn btn--action"
+          type="submit"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
