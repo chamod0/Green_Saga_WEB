@@ -38,7 +38,6 @@ export class AuthService {
     return localStorage.getItem('refreshToken');
   }
   isLoggedin(): boolean {
-    debugger;
     return !!localStorage.getItem('token');
   }
   decodedToken() {
@@ -54,6 +53,9 @@ export class AuthService {
   }
   getRoleFromToken() {
     if (this.userPayload) return this.userPayload.role;
+  }
+  getUserIDFromToken() {
+    if (this.userPayload) return this.userPayload.certserialnumber;
   }
   renewToken(tokenApi: TokenApiModel) {
     return this.http.post<any>(`${this.baseUrl}Refresh`, tokenApi);

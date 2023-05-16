@@ -3,20 +3,31 @@
 </mat-toolbar>
 &nbsp;&nbsp;&nbsp;
 <div class="container" novalidate>
-  <form class="form">
+  <form class="form" [formGroup]="projectForm">
+    <div class="col-6"></div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Project Code</mat-label>
+      <input formControlName="projectCode" matInput />
+    </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Project Name</mat-label>
-      <input matInput />
+      <input formControlName="projectName" matInput />
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Discription</mat-label>
-      <textarea matInput></textarea>
+      <textarea formControlName="description" matInput></textarea>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Cutivation Type</mat-label>
-      <mat-select>
-        <mat-option value="one">First option</mat-option>
-        <mat-option value="two">Second option</mat-option>
+      <mat-select formControlName="cutivationType">
+        <mat-option value="1">Vegetable Cultivation</mat-option>
+        <mat-option value="2">Herb Cultivation</mat-option>
+        <mat-option value="3">Flower Cultivation</mat-option>
+        <mat-option value="4">Berry Cultivation</mat-option>
+        <mat-option value="5">Microgreens and Sprouts</mat-option>
+        <mat-option value="6">Medicinal Plants</mat-option>
+        <mat-option value="7">Exotic or Specialty Plants</mat-option>
+        <mat-option value="8">Culinary or Aromatic Plants</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-divider></mat-divider>
@@ -27,6 +38,8 @@
         color="primary"
         style="top: 7px; padding: 0.5em 13em"
         class="btn btn--action"
+        (click)="onSubmit()"
+        type="submit"
       >
         Get Started
       </button>
