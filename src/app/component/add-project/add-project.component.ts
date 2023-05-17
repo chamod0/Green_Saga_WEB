@@ -52,14 +52,14 @@ export class AddProjectComponent implements OnInit {
       let userIdFromToken = this.auth.getUserIDFromToken();
       this.userId = val || userIdFromToken;
     });
-    var myDate = new Date();
+    var myDate = new Date(this.todayDate);
 
     debugger;
     this.projectForm = this.fb.group({
       projectCode: [this.projectCode, Validators.required],
       projectName: ['', Validators.required],
       description: ['', Validators.required],
-      cutivationType: ['', Validators.required],
+      supervisorID: ['', Validators.required],
       createby: [this.userId, Validators.required],
       userID: [this.userId, Validators.required],
       createAt: [myDate],

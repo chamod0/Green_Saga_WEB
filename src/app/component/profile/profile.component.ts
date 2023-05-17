@@ -54,9 +54,20 @@ export class ProfileComponent implements OnInit {
   }
 
   lodeProjrct() {
-    this.project.getProject(Number(this.userId), 0).subscribe((res) => {
-      this.projects = res;
-      this.projectCount = res.length;
-    });
+    if (this.Role == 'Farmer') {
+      this.project.getProject(Number(this.userId), 0).subscribe((res) => {
+        this.projects = res;
+        console.log(this.projects);
+
+        this.projectCount = res.length;
+      });
+    } else {
+      this.project
+        .getProjectForSupervisor(Number(this.userId), 0)
+        .subscribe((res) => {
+          this.projects = res;
+          this.projectCount = res.length;
+        });
+    }
   }
 }
