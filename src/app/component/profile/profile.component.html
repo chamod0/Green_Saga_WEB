@@ -762,19 +762,21 @@
         <div style="text-align: center">
           <h1>{{ projectCount }}</h1>
           <h3>Total Projects</h3>
-          <p>
-            Click the Button and Start <br />
-            your Cultivation project
-          </p>
-          <div class="btnlo">
-            <button
-              style="top: 7px; padding: 0.5em 13em"
-              class="btn btn--action"
-              (click)="openAddProject()"
-            >
-              Get Started
-            </button>
-          </div>
+          <ng-container *ngIf="Role == 'Farmer'">
+            <p>
+              Click the Button and Start <br />
+              your Cultivation project
+            </p>
+            <div class="btnlo">
+              <button
+                style="top: 7px; padding: 0.5em 13em"
+                class="btn btn--action"
+                (click)="openAddProject()"
+              >
+                Get Started
+              </button>
+            </div>
+          </ng-container>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <!-- Project add end -->
@@ -791,7 +793,10 @@
                     />
                     <div class="ml-2">
                       &nbsp; &nbsp; <a>{{ project.projectName }} </a><br />
-                      &nbsp; &nbsp; <a class="tx-11 text-muted">5 min ago</a>
+                      &nbsp; &nbsp;
+                      <a class="tx-11 text-muted">{{
+                        project.createAt | dateAsAgo
+                      }}</a>
                     </div>
                   </div>
                   <div class="dropdown">
@@ -879,5 +884,3 @@
     </div>
   </div>
 </div>
-
-<app-add-project [childName]=""></app-add-project>

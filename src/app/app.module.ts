@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { DateAsAgoPipe } from './component/shared/date-as-ago.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
     TimelineComponent,
     CultivationComponent,
     AddProjectComponent,
+    DateAsAgoPipe,
   ],
   imports: [
     BrowserModule,
@@ -61,5 +63,8 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
     },
   ],
   bootstrap: [AppComponent],
+  exports: [
+    DateAsAgoPipe
+  ],
 })
 export class AppModule {}

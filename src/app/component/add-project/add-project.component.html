@@ -2,9 +2,12 @@
   <span class="fill-remaining-space">Add Your Project</span>
 </mat-toolbar>
 &nbsp;&nbsp;&nbsp;
+<h5>Project Add</h5>
+
 <div class="container" novalidate>
   <form class="form" [formGroup]="projectForm">
     <div class="col-6"></div>
+
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Project Code</mat-label>
       <input formControlName="projectCode" matInput />
@@ -17,7 +20,7 @@
       <mat-label>Discription</mat-label>
       <textarea formControlName="description" matInput></textarea>
     </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Cutivation Type</mat-label>
       <mat-select formControlName="cutivationType">
         <mat-option value="1">Vegetable Cultivation</mat-option>
@@ -28,6 +31,15 @@
         <mat-option value="6">Medicinal Plants</mat-option>
         <mat-option value="7">Exotic or Specialty Plants</mat-option>
         <mat-option value="8">Culinary or Aromatic Plants</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Cutivation Type</mat-label>
+      <mat-select placeholder="Select Your Idol" formControlName="yourIdol">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let yi of Supervisors" [value]="yi.ID">
+          {{ yi.firstName + "_" + yi.lastName }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-divider></mat-divider>
