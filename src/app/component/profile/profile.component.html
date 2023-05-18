@@ -762,19 +762,21 @@
         <div style="text-align: center">
           <h1>{{ projectCount }}</h1>
           <h3>Total Projects</h3>
-          <p>
-            Click the Button and Start <br />
-            your Cultivation project
-          </p>
-          <div class="btnlo">
-            <button
-              style="top: 7px; padding: 0.5em 13em"
-              class="btn btn--action"
-              (click)="openAddProject()"
-            >
-              Get Started
-            </button>
-          </div>
+          <ng-container *ngIf="Role == 'Farmer'">
+            <p>
+              Click the Button and Start <br />
+              your Cultivation project
+            </p>
+            <div class="btnlo">
+              <button
+                style="top: 7px; padding: 0.5em 13em"
+                class="btn btn--action"
+                (click)="openAddProject()"
+              >
+                Get Started
+              </button>
+            </div>
+          </ng-container>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <!-- Project add end -->
@@ -791,16 +793,18 @@
                     />
                     <div class="ml-2">
                       &nbsp; &nbsp; <a>{{ project.projectName }} </a><br />
-                      &nbsp; &nbsp; <a class="tx-11 text-muted">5 min ago</a>
+                      &nbsp; &nbsp;
+                      <a class="tx-11 text-muted">{{
+                        project.createAt | dateAsAgo
+                      }}</a>
                     </div>
                   </div>
                   <div class="dropdown">
                     <button
                       class="btn p-0"
-                      type="button"
-                      id="dropdownMenuButton3"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
                       <svg
@@ -820,6 +824,21 @@
                         <circle cx="5" cy="12" r="1"></circle>
                       </svg>
                     </button>
+
+                    <ul
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="gotoTimeline(project.id)"
+                          >Go to Time Line</a
+                        >
+                      </li>
+                      <li><a class="dropdown-item" href="#">Update</a></li>
+                      <li><a class="dropdown-item">Delete</a></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -828,7 +847,7 @@
                   <div>
                     <dt>
                       <div class="ml-2">
-                        <a>Mike Popescu</a>
+                        <a>{{ project.supervisorName }}</a>
                         <img
                           class="img-xs rounded-circle"
                           src="https://bootdey.com/img/Content/avatar/avatar6.png"
@@ -879,5 +898,3 @@
     </div>
   </div>
 </div>
-
-<app-add-project [childName]=""></app-add-project>

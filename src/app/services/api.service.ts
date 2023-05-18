@@ -12,4 +12,7 @@ export class ApiService {
   getUsers() {
     return this.http.get<any>(this.baseUrl);
   }
+  getSupervisor() {
+    return this.http.get<any>(`${this.baseUrl}getUserByRole/0/supervisor`);
+  }
 }

@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   users: any = [];
   fullName: string = 'user';
   Role: string = 'user';
+  userId: string = '0';
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -40,6 +41,10 @@ export class DashboardComponent implements OnInit {
     this.userStore.getRoleFromStore().subscribe((val) => {
       let RoleFromToken = this.auth.getRoleFromToken();
       this.Role = val || RoleFromToken;
+      this.userStore.getUserIdFromStore().subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIDFromToken();
+        this.userId = val || userIdFromToken;
+      });
     });
   }
   //addToggle = () => this.toggleSidebar.emit(!this.status);

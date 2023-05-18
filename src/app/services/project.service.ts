@@ -16,7 +16,16 @@ export class ProjectService {
   }
   getProject(userID: any, proID: any) {
     return this.http.get<any>(
-      `${this.baseUrl}grtProject/` + proID + `/` + userID
+      `${this.baseUrl}getProject/` + proID + `/` + userID
     );
+  }
+  getProjectForSupervisor(userID: any, proID: any) {
+    return this.http.get<any>(
+      `${this.baseUrl}getProjectForSupervisor/` + proID + `/` + userID
+    );
+  }
+  add(projectObj: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}projectCreate`, projectObj);
   }
 }

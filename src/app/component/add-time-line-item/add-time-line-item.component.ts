@@ -16,22 +16,26 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
+import { AddProjectComponent } from '../add-project/add-project.component';
+import { TimeLineService } from 'src/app/services/time-line.service';
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.scss'],
+  selector: 'app-add-time-line-item',
+  templateUrl: './add-time-line-item.component.html',
+  styleUrls: ['./add-time-line-item.component.scss'],
 })
-export class AddProjectComponent implements OnInit {
-  projectForm!: FormGroup;
+export class AddTimeLineItemComponent {
+  timeLineForm!: FormGroup;
   userId!: Number;
   projectCode: any;
+  projectId: any;
   Supervisors: any = [];
-  todayDate: Date = new Date();
+  Role: string = 'user';
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private project: ProjectService,
+    private timeLine: TimeLineService,
     private router: Router,
     private users: ApiService,
     private userStore: UserStoreService,
@@ -40,44 +44,43 @@ export class AddProjectComponent implements OnInit {
     private ref: MatDialogRef<AddProjectComponent>
   ) {}
   currentDate = new Date();
+
+  ngOnInit(): void {
+    this.projectCode = this.data.projectCode;
+    this.getUserData();
+
+    var farmrerID = 0;
+    var supervisorID = 0;
+    if (this.Role == 'Farmer') {
+      farmrerID = 1;
+    } else {
+      supervisorID = 1;
+    }
+
+    this.timeLineForm = this.fb.group({
+      projectId: [this.projectId, Validators.required],
+      title: ['', Validators.required],
+      farmerId: [farmrerID],
+      description: ['', Validators.required],
+      supervisorID: [supervisorID],
+      isActive: [true],
+      createby: [this.userId, Validators.required],
+      userID: [this.userId, Validators.required],
+      createAt: [this.currentDate],
+      timeLineStatus: [0, Validators.required],
+    });
+  }
   afuConfig = {
     uploadAPI: {
       url: 'https://example-file-upload-api',
     },
   };
-
-  ngOnInit(): void {
-    this.getSupervisors();
-    this.projectCode = this.data.projectCode;
-    this.userStore.getUserIdFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIDFromToken();
-      this.userId = val || userIdFromToken;
-    });
-
-    debugger;
-    this.projectForm = this.fb.group({
-      projectCode: [this.projectCode, Validators.required],
-      projectName: ['', Validators.required],
-      description: ['', Validators.required],
-      supervisorID: ['', Validators.required],
-      createby: [this.userId, Validators.required],
-      userID: [this.userId, Validators.required],
-      createAt: [this.currentDate],
-    });
-  }
-  getSupervisors() {
-    this.users.getSupervisor().subscribe((res) => {
-      debugger;
-      this.Supervisors = res;
-    });
-  }
-
   onSubmit() {
     debugger;
-    if (this.projectForm.valid) {
-      this.project.createProject(this.projectForm.value).subscribe({
+    if (this.timeLineForm.valid) {
+      this.timeLine.addToTimeLine(this.timeLineForm.value).subscribe({
         next: (res) => {
-          this.projectForm.reset();
+          this.timeLineForm.reset();
           this.router.navigate(['timeline']);
           this.toast.success({
             detail: 'SUCCESS',
@@ -95,7 +98,18 @@ export class AddProjectComponent implements OnInit {
         },
       });
     } else {
-      ValidatorForm.validateAllFormFildes(this.projectForm);
+      ValidatorForm.validateAllFormFildes(this.timeLineForm);
     }
+  }
+
+  getUserData() {
+    this.userStore.getRoleFromStore().subscribe((Role) => {
+      let RoleFromToken = this.auth.getRoleFromToken();
+      this.Role = Role || RoleFromToken;
+    });
+    this.userStore.getUserIdFromStore().subscribe((val) => {
+      let userIdFromToken = this.auth.getUserIDFromToken();
+      this.userId = val || userIdFromToken;
+    });
   }
 }

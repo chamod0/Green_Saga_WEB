@@ -1,9 +1,17 @@
 <mat-toolbar color="primary">
-  <span class="fill-remaining-space">Add Your Project</span>
+  <span class="fill-remaining-space">Add To Time Line</span>
 </mat-toolbar>
+<div class="col-6">
+  <div class="breadcrumb-list">
+    <span class="font-20"
+      ><mat-icon>calendar_today</mat-icon>
+      {{ currentDate | date : "dd-MM-yyyy HH:mm" }}</span
+    >
+  </div>
+</div>
 &nbsp;&nbsp;&nbsp;
 <div class="container" novalidate>
-  <form class="form" [formGroup]="projectForm">
+  <form class="form" [formGroup]="timeLineForm">
     <div class="col-6"></div>
 
     <mat-form-field class="example-full-width" appearance="fill">
@@ -11,8 +19,8 @@
       <input formControlName="projectCode" matInput />
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Project Name</mat-label>
-      <input formControlName="projectName" matInput />
+      <mat-label>Titel</mat-label>
+      <input formControlName="title" matInput />
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Discription</mat-label>
@@ -20,12 +28,14 @@
     </mat-form-field>
 
     <mat-form-field class="" appearance="fill">
-      <mat-label>select Supervisors</mat-label>
-      <mat-select placeholder="Select Your Idol" formControlName="supervisorID">
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let yi of Supervisors" [value]="yi.id">
-          {{ yi.firstName + "_" + yi.lastName }}
-        </mat-option>
+      <mat-label>Type</mat-label>
+      <mat-select placeholder="Select Your Idol" formControlName="sta">
+        <mat-option [value]="1">Reminder</mat-option>
+        <mat-option [value]="2">Important</mat-option>
+        <mat-option [value]="3">Completed</mat-option>
+        <mat-option [value]="4">Task</mat-option>
+        <mat-option [value]="5">ToDoTask</mat-option>
+        <mat-option [value]="6">Question</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-divider></mat-divider>
