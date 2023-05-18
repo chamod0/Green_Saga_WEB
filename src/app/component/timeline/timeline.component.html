@@ -6,15 +6,28 @@
   <div class="col-md-9">
     <div class="timeline-centered timeline-sm">
       <div *ngFor="let TimeLineBlock of TimeLine">
-        <article *ngIf="TimeLineBlock.farmrerID == 1" class="timeline-entry">
+        <article
+          class="timeline-entry"
+          [class.left-aligned]="TimeLineBlock.supervisorId === 1"
+          [class.text-primary]="TimeLineBlock.farmerId === 1"
+        >
           <div class="timeline-entry-inner">
             <time datetime="2014-01-10T03:45" class="timeline-time"
               ><span>{{ TimeLineBlock.createAt | dateAsAgo }}</span></time
             >
             <div class="timeline-icon bg-violet">
-              <i class="fa fa-exclamation"></i>
+              <i
+                class="fa"
+                [class.fa-group]="TimeLineBlock.timeLineStatus === 1"
+                [class.fa-exclamation]="TimeLineBlock.timeLineStatus === 2"
+              ></i>
             </div>
-            <div class="timeline-label">
+            <div
+              class="timeline-label"
+              class="timeline-label"
+              [class.bg-orange]="TimeLineBlock.timeLineStatus === 1"
+              [class.bg-green]="TimeLineBlock.timeLineStatus === 2"
+            >
               <h4 class="timeline-title">
                 {{ TimeLineBlock.title }}
               </h4>

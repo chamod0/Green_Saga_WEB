@@ -12,6 +12,8 @@ import { TimeLineService } from 'src/app/services/time-line.service';
 })
 export class TimelineComponent {
   TimeLine: any = [];
+  status: boolean = false;
+  arrow: string = 'left';
   userId: any;
   projectCount!: number;
   Role: string = 'user';
@@ -35,12 +37,16 @@ export class TimelineComponent {
     });
     _popup.afterClosed().subscribe((item) => {
       //console.log(item);
-      this.Timeline();
+      this.lodeTimeLine(localStorage.getItem('Pro_Id'));
     });
   }
-
+  addToggle() {
+    this.status = !this.status;
+    this.status == true ? (this.arrow = 'right') : (this.arrow = 'left');
+  }
   ngOnInit(): void {
     var ID = localStorage.getItem('Pro_Id');
+
     this.getUserData();
     this.lodeTimeLine(ID);
   }
@@ -74,6 +80,5 @@ export class TimelineComponent {
           this.projectCount = res.length;
         });
     }
-    this.lodeTimeLine(ID);
   }
 }

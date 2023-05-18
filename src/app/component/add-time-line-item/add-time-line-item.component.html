@@ -29,7 +29,10 @@
 
     <mat-form-field class="" appearance="fill">
       <mat-label>Type</mat-label>
-      <mat-select placeholder="Select Your Idol" formControlName="sta">
+      <mat-select
+        placeholder="Select Your Idol"
+        formControlName="timeLineStatus"
+      >
         <mat-option [value]="1">Reminder</mat-option>
         <mat-option [value]="2">Important</mat-option>
         <mat-option [value]="3">Completed</mat-option>

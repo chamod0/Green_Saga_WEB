@@ -47,6 +47,7 @@ export class AddTimeLineItemComponent {
 
   ngOnInit(): void {
     this.projectCode = this.data.projectCode;
+    this.projectId = this.data.proID;
     this.getUserData();
 
     var farmrerID = 0;
