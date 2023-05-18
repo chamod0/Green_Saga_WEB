@@ -5,24 +5,27 @@
 <div class="container bootstrap snippets bootdeys">
   <div class="col-md-9">
     <div class="timeline-centered timeline-sm">
-      <article class="timeline-entry">
-        <div class="timeline-entry-inner">
-          <time datetime="2014-01-10T03:45" class="timeline-time"
-            ><span>12:45 AM</span><span>Today</span></time
-          >
-          <div class="timeline-icon bg-violet">
-            <i class="fa fa-exclamation"></i>
-          </div>
-          <div class="timeline-label">
-            <h4 class="timeline-title">New Project</h4>
+      <div *ngFor="let TimeLineBlock of TimeLine">
+        <article *ngIf="TimeLineBlock.farmrerID == 1" class="timeline-entry">
+          <div class="timeline-entry-inner">
+            <time datetime="2014-01-10T03:45" class="timeline-time"
+              ><span>{{ TimeLineBlock.createAt | dateAsAgo }}</span></time
+            >
+            <div class="timeline-icon bg-violet">
+              <i class="fa fa-exclamation"></i>
+            </div>
+            <div class="timeline-label">
+              <h4 class="timeline-title">
+                {{ TimeLineBlock.title }}
+              </h4>
 
-            <p>
-              Tolerably earnestly middleton extremely distrusts she boy now not.
-              Add and offered prepare how cordial.
-            </p>
+              <p>
+                {{ TimeLineBlock.description }}
+              </p>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
       <article class="timeline-entry left-aligned">
         <div class="timeline-entry-inner">
           <time datetime="2014-01-10T03:45" class="timeline-time"
@@ -78,15 +81,17 @@
           </div>
         </div>
         <div class="timeline-entry-inner">
-          <div
-            style="
-              -webkit-transform: rotate(-90deg);
-              -moz-transform: rotate(-90deg);
-            "
-            class="timeline-icon"
-          >
-            <i class="fa fa-plus"></i>
-          </div>
+          <a (click)="openAddTimelineItem()">
+            <div
+              style="
+                -webkit-transform: rotate(-90deg);
+                -moz-transform: rotate(-90deg);
+              "
+              class="timeline-icon"
+            >
+              <button></button>
+              <i class="fa fa-plus"></i></div
+          ></a>
         </div>
       </article>
     </div>

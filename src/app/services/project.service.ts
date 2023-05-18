@@ -24,4 +24,8 @@ export class ProjectService {
       `${this.baseUrl}getProjectForSupervisor/` + proID + `/` + userID
     );
   }
+  add(projectObj: any) {
+    debugger;
+    return this.http.post<any>(`${this.baseUrl}projectCreate`, projectObj);
+  }
 }

@@ -25,6 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { DateAsAgoPipe } from './component/shared/date-as-ago.pipe';
+import { AddTimeLineItemComponent } from './component/add-time-line-item/add-time-line-item.component';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { DateAsAgoPipe } from './component/shared/date-as-ago.pipe';
     CultivationComponent,
     AddProjectComponent,
     DateAsAgoPipe,
+    AddTimeLineItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { DateAsAgoPipe } from './component/shared/date-as-ago.pipe';
     MatButtonModule,
     MatDividerModule,
     AngularFileUploaderModule,
+    MatIconModule,
   ],
   providers: [
     {
@@ -63,8 +67,6 @@ import { DateAsAgoPipe } from './component/shared/date-as-ago.pipe';
     },
   ],
   bootstrap: [AppComponent],
-  exports: [
-    DateAsAgoPipe
-  ],
+  exports: [DateAsAgoPipe],
 })
 export class AppModule {}

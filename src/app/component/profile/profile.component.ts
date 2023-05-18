@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -20,8 +21,14 @@ export class ProfileComponent implements OnInit {
     private _dialog: MatDialog,
     private project: ProjectService,
     private userStore: UserStoreService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
+  ngOnInit(): void {
+    this.getUserData();
+    this.lodeProjrct();
+  }
+
   openAddProject() {
     const dialogConfig = new MatDialogConfig();
 
@@ -38,9 +45,11 @@ export class ProfileComponent implements OnInit {
       this.lodeProjrct();
     });
   }
-  ngOnInit(): void {
-    this.getUserData();
-    this.lodeProjrct();
+
+  gotoTimeline(id: any) {
+    // var payLoad = { ID: id, Mode: DocumentMode.UPDATE };
+    localStorage.setItem('Pro_Id', id);
+    this.router.navigate(['/dashboard/timeline']);
   }
   getUserData() {
     this.userStore.getRoleFromStore().subscribe((Role) => {

@@ -802,10 +802,9 @@
                   <div class="dropdown">
                     <button
                       class="btn p-0"
-                      type="button"
-                      id="dropdownMenuButton3"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
                       <svg
@@ -825,6 +824,21 @@
                         <circle cx="5" cy="12" r="1"></circle>
                       </svg>
                     </button>
+
+                    <ul
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="gotoTimeline(project.id)"
+                          >Go to Time Line</a
+                        >
+                      </li>
+                      <li><a class="dropdown-item" href="#">Update</a></li>
+                      <li><a class="dropdown-item">Delete</a></li>
+                    </ul>
                   </div>
                 </div>
               </div>

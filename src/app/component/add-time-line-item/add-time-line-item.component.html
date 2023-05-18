@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Add To Time Line</span>
+</mat-toolbar>
+<div class="col-6">
+  <div class="breadcrumb-list">
+    <span class="font-20"
+      ><mat-icon>calendar_today</mat-icon>
+      {{ currentDate | date : "dd-MM-yyyy HH:mm" }}</span
+    >
+  </div>
+</div>
+&nbsp;&nbsp;&nbsp;
+<div class="container" novalidate>
+  <form class="form" [formGroup]="timeLineForm">
+    <div class="col-6"></div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Project Code</mat-label>
+      <input formControlName="projectCode" matInput />
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Titel</mat-label>
+      <input formControlName="title" matInput />
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Discription</mat-label>
+      <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select placeholder="Select Your Idol" formControlName="sta">
+        <mat-option [value]="1">Reminder</mat-option>
+        <mat-option [value]="2">Important</mat-option>
+        <mat-option [value]="3">Completed</mat-option>
+        <mat-option [value]="4">Task</mat-option>
+        <mat-option [value]="5">ToDoTask</mat-option>
+        <mat-option [value]="6">Question</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <angular-file-uploader [config]="afuConfig"> </angular-file-uploader>
+    <div class="btnlo">
+      <button
+        mat-raised-button
+        color="primary"
+        style="top: 7px; padding: 0.5em 13em"
+        class="btn btn--action"
+        (click)="onSubmit()"
+        type="submit"
+      >
+        Get Started
+      </button>
+    </div>
+  </form>
+  &nbsp;&nbsp;&nbsp;
+</div>
