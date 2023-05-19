@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddTimeLineItemComponent } from '../add-time-line-item/add-time-line-item.component';
 import { TimeLineService } from 'src/app/services/time-line.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-timeline',
@@ -21,7 +22,8 @@ export class TimelineComponent {
     private _dialog: MatDialog,
     private timeLine: TimeLineService,
     private userStore: UserStoreService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toast: NgToastService
   ) {}
   dialogConfig = new MatDialogConfig();
   openAddTimelineItem() {
@@ -80,5 +82,18 @@ export class TimelineComponent {
           this.projectCount = res.length;
         });
     }
+  }
+  deleteTimeLineBox(id: any) {
+    this.timeLine.deleteTimeLineBox(id).subscribe((res) => {
+      // this.projects = res;
+      // console.log(this.projects);
+
+      this.toast.info({
+        detail: 'info',
+        summary: 'Project deleeted sucess',
+        duration: 5000,
+      });
+      this.lodeTimeLine(localStorage.getItem('Pro_Id'));
+    });
   }
 }

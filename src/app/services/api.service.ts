@@ -15,4 +15,7 @@ export class ApiService {
   getSupervisor() {
     return this.http.get<any>(`${this.baseUrl}getUserByRole/0/supervisor`);
   }
+  getUsersbyid(ID: any) {
+    return this.http.get<any>(`${this.baseUrl}getUserByID/` + ID);
+  }
 }

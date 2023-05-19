@@ -19,4 +19,7 @@ export class TimeLineService {
       `${this.baseUrl}getTimeLineForFarmer/` + proID + `/` + 0
     );
   }
+  deleteTimeLineBox(ID: any) {
+    return this.http.delete<any>(`${this.baseUrl}deleteTimeLine/` + ID);
+  }
 }

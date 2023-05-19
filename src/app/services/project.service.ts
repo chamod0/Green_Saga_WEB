@@ -28,4 +28,7 @@ export class ProjectService {
     debugger;
     return this.http.post<any>(`${this.baseUrl}projectCreate`, projectObj);
   }
+  deleteProject(proID: any) {
+    return this.http.delete<any>(`${this.baseUrl}deleteProjects/` + proID);
+  }
 }

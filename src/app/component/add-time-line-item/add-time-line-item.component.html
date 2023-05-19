@@ -14,10 +14,10 @@
   <form class="form" [formGroup]="timeLineForm">
     <div class="col-6"></div>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Project Code</mat-label>
       <input formControlName="projectCode" matInput />
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Titel</mat-label>
       <input formControlName="title" matInput />
@@ -32,6 +32,7 @@
       <mat-select
         placeholder="Select Your Idol"
         formControlName="timeLineStatus"
+        (selectionChange)="selectStatus($event.value)"
       >
         <mat-option [value]="1">Reminder</mat-option>
         <mat-option [value]="2">Important</mat-option>
@@ -41,18 +42,81 @@
         <mat-option [value]="6">Question</mat-option>
       </mat-select>
     </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <mat-form-field appearance="fill" *ngIf="datePikerActive">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          placeholder="Start date"
+          formControlName="startDate"
+        />
+        <input matEndDate placeholder="End date" formControlName="endDate" />
+      </mat-date-range-input>
+
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
     <mat-divider></mat-divider>
-    <angular-file-uploader [config]="afuConfig"> </angular-file-uploader>
+    <!-- <angular-file-uploader [config]="afuConfig"> </angular-file-uploader> -->
+    <input
+      type="file"
+      class="file-input"
+      (change)="onFileselecter($event)"
+      #fileUpload
+    />
+
+    <div class="file-upload">
+      {{ fileName || "No file uploaded yet." }}
+
+      <button
+        mat-mini-fab
+        color="primary"
+        class="upload-btn"
+        (click)="fileUpload.click()"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <button
+        color="primary"
+        class="btn btn--action"
+        type="button"
+        (click)="onUpload()"
+      >
+        upload
+      </button>
+    </div>
+    <!-- <input type="file" (change)="onFileselecter($event)" /> -->
+
+    <div *ngIf="imgProgres > 0">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="imgProgres"
+      ></mat-progress-bar
+      >{{ imgProgres }}%
+
+      <!-- <img [src]="imgUrl" alt="" class="timeline-img pull-top" /> -->
+    </div>
     <div class="btnlo">
       <button
         mat-raised-button
         color="primary"
-        style="top: 7px; padding: 0.5em 13em"
+        style="
+          top: 7px;
+          padding-right: 0.5em 13em;
+          position: relative;
+          left: 550px;
+          top: 2px;
+          color: aliceblue;
+        "
         class="btn btn--action"
         (click)="onSubmit()"
         type="submit"
       >
-        Get Started
+        Submit
       </button>
     </div>
   </form>
