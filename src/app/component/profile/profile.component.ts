@@ -6,6 +6,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   projects: any = [];
+  UserDetails: any = [];
   userId: any;
   projectCount!: number;
   Role: string = 'user';
@@ -21,8 +24,10 @@ export class ProfileComponent implements OnInit {
     private _dialog: MatDialog,
     private project: ProjectService,
     private userStore: UserStoreService,
+    private User: ApiService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService
   ) {}
   ngOnInit(): void {
     this.getUserData();
@@ -60,6 +65,10 @@ export class ProfileComponent implements OnInit {
       let userIdFromToken = this.auth.getUserIDFromToken();
       this.userId = val || userIdFromToken;
     });
+    this.User.getUsersbyid(Number(this.userId)).subscribe((res) => {
+      debugger;
+      this.UserDetails = res;
+    });
   }
 
   lodeProjrct() {
@@ -78,5 +87,18 @@ export class ProfileComponent implements OnInit {
           this.projectCount = res.length;
         });
     }
+  }
+  deleteProject(id: any) {
+    this.project.deleteProject(id).subscribe((res) => {
+      // this.projects = res;
+      // console.log(this.projects);
+
+      this.toast.info({
+        detail: 'info',
+        summary: 'Task deleeted sucess',
+        duration: 5000,
+      });
+      this.lodeProjrct();
+    });
   }
 }

@@ -535,3 +535,9 @@ body {
   .timeline-img.pull-right {
   margin: 5px 0 0 10px;
 }
+img.Image {
+  max-width: 100%;
+}
+div#ImageContainer {
+  width: 600px;
+}

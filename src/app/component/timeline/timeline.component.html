@@ -2,98 +2,124 @@
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
   rel="stylesheet"
 />
-<div class="container bootstrap snippets bootdeys">
-  <div class="col-md-9">
-    <div class="timeline-centered timeline-sm">
-      <div *ngFor="let TimeLineBlock of TimeLine">
-        <article *ngIf="TimeLineBlock.farmrerID == 1" class="timeline-entry">
-          <div class="timeline-entry-inner">
-            <time datetime="2014-01-10T03:45" class="timeline-time"
-              ><span>{{ TimeLineBlock.createAt | dateAsAgo }}</span></time
-            >
-            <div class="timeline-icon bg-violet">
-              <i class="fa fa-exclamation"></i>
-            </div>
-            <div class="timeline-label">
-              <h4 class="timeline-title">
-                {{ TimeLineBlock.title }}
-              </h4>
-
-              <p>
-                {{ TimeLineBlock.description }}
-              </p>
-            </div>
-          </div>
-        </article>
-      </div>
-      <article class="timeline-entry left-aligned">
-        <div class="timeline-entry-inner">
-          <time datetime="2014-01-10T03:45" class="timeline-time"
-            ><span>9:15 AM</span><span>Today</span></time
-          >
-          <div class="timeline-icon bg-green"><i class="fa fa-group"></i></div>
-          <div class="timeline-label bg-green">
-            <h4 class="timeline-title">Job Meeting</h4>
-
-            <p>
-              Caulie dandelion maize lentil collard greens radish arugula sweet
-              pepper water spinach kombu courgette.
-            </p>
-          </div>
-        </div>
-      </article>
-      <article class="timeline-entry">
-        <div class="timeline-entry-inner">
-          <time datetime="2014-01-09T13:22" class="timeline-time"
-            ><span>8:20 PM</span><span>04/03/2013</span></time
-          >
-          <div class="timeline-icon bg-orange">
-            <i class="fa fa-paper-plane"></i>
-          </div>
-          <div class="timeline-label bg-orange">
-            <h4 class="timeline-title">Daily Feeds</h4>
-
-            <p>
+<div class="container">
+  <div class="profile-page tx-13">
+    <div class="row">
+      <div class="col-12 grid-margin">
+        <div class="profile-header">
+          <div class="cover">
+            <div class="gray-shade"></div>
+            <figure>
               <img
-                src="https://www.bootdey.com/image/45x45/"
-                alt=""
-                class="timeline-img pull-left"
-              />Parsley amaranth tigernut silver beet maize fennel spinach
-              ricebean black-eyed. Tolerably earnestly middleton extremely
-              distrusts she boy now not. Add and offered prepare how cordial.
-            </p>
-          </div>
-        </div>
-      </article>
-      <article class="timeline-entry left-aligned">
-        <div class="timeline-entry-inner">
-          <time datetime="2014-01-10T03:45" class="timeline-time"
-            ><span>9:15 AM</span><span>Today</span></time
-          >
-          <div class="timeline-icon bg-green"><i class="fa fa-group"></i></div>
-          <div class="timeline-label bg-green">
-            <h4 class="timeline-title">Job Meeting</h4>
-
-            <p>
-              Caulie dandelion maize lentil collard greens radish arugula sweet
-              pepper water spinach kombu courgette.
-            </p>
-          </div>
-        </div>
-        <div class="timeline-entry-inner">
-          <a (click)="openAddTimelineItem()">
+                style="opacity: 0.2"
+                src="../../../assets/img/timeLineHeader.png"
+                class="img-fluid"
+                alt="profile cover"
+              />
+            </figure>
             <div
-              style="
-                -webkit-transform: rotate(-90deg);
-                -moz-transform: rotate(-90deg);
-              "
-              class="timeline-icon"
-            >
-              <button></button>
-              <i class="fa fa-plus"></i></div
-          ></a>
+              class="cover-body d-flex justify-content-between align-items-center"
+            ></div>
+          </div>
         </div>
-      </article>
+      </div>
+    </div>
+    <div class="container bootstrap snippets bootdeys">
+      <div class="col-md-9">
+        <div class="timeline-centered timeline-sm">
+          <div *ngFor="let TimeLineBlock of TimeLine">
+            <article
+              class="timeline-entry"
+              [class.left-aligned]="TimeLineBlock.farmerId === 1"
+              [class.text-primary]="TimeLineBlock.supervisorId === 1"
+            >
+              <div class="timeline-entry-inner">
+                <time datetime="2014-01-10T03:45" class="timeline-time"
+                  ><span>{{ TimeLineBlock.createAt | dateAsAgo }}</span></time
+                >
+                <div
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  class="timeline-icon"
+                  [class.bg-blue]="TimeLineBlock.timeLineStatus === 1"
+                  [class.bg-red]="TimeLineBlock.timeLineStatus === 2"
+                  [class.bg-lightgreen]="TimeLineBlock.timeLineStatus === 3"
+                  [class.bg-yellow]="TimeLineBlock.timeLineStatus === 4"
+                  [class.bg-orange]="TimeLineBlock.timeLineStatus === 5"
+                  [class.bg-green]="TimeLineBlock.timeLineStatus === 6"
+                >
+                  <i
+                    class="fa"
+                    [class.fa-bell]="TimeLineBlock.timeLineStatus === 1"
+                    [class.fa-exclamation]="TimeLineBlock.timeLineStatus === 2"
+                    [class.fa-check]="TimeLineBlock.timeLineStatus === 3"
+                    [class.fa-thumb-tack]="TimeLineBlock.timeLineStatus === 4"
+                    [class.fa-paper-plane]="TimeLineBlock.timeLineStatus === 5"
+                    [class.fa-question]="TimeLineBlock.timeLineStatus === 6"
+                  ></i>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Update</a></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      (click)="deleteTimeLineBox(TimeLineBlock.id)"
+                      >Delete</a
+                    >
+                  </li>
+                </ul>
+                <div
+                  class="timeline-label"
+                  class="timeline-label"
+                  [class.bg-blue]="TimeLineBlock.timeLineStatus === 1"
+                  [class.bg-red]="TimeLineBlock.timeLineStatus === 2"
+                  [class.bg-lightgreen]="TimeLineBlock.timeLineStatus === 3"
+                  [class.bg-yellow]="TimeLineBlock.timeLineStatus === 4"
+                  [class.bg-orange]="TimeLineBlock.timeLineStatus === 5"
+                  [class.bg-green]="TimeLineBlock.timeLineStatus === 6"
+                >
+                  <h4 class="timeline-title">
+                    {{ TimeLineBlock.title }}
+                  </h4>
+
+                  <p>
+                    <img
+                      [src]="TimeLineBlock.image"
+                      class="Image timeline-img pull-top"
+                    />
+                    {{ TimeLineBlock.description }}
+                    <br />
+                    <span *ngIf="TimeLineBlock.startDate != null"
+                      >Start date :
+                      {{ TimeLineBlock.startDate | date : "dd-MM-yyyy " }}
+                      <br />End date :
+                      {{ TimeLineBlock.endDate | date : "dd-MM-yyyy " }}</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <article class="timeline-entry left-aligned">
+            <div class="timeline-entry-inner">
+              <a (click)="openAddTimelineItem()">
+                <div
+                  style="
+                    -webkit-transform: rotate(-90deg);
+                    -moz-transform: rotate(-90deg);
+                  "
+                  class="timeline-icon"
+                >
+                  <button></button>
+                  <i class="fa fa-plus"></i></div
+              ></a>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddTimeLineItemComponent } from '../add-time-line-item/add-time-line-item.component';
 import { TimeLineService } from 'src/app/services/time-line.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-timeline',
@@ -12,6 +13,8 @@ import { TimeLineService } from 'src/app/services/time-line.service';
 })
 export class TimelineComponent {
   TimeLine: any = [];
+  status: boolean = false;
+  arrow: string = 'left';
   userId: any;
   projectCount!: number;
   Role: string = 'user';
@@ -19,7 +22,8 @@ export class TimelineComponent {
     private _dialog: MatDialog,
     private timeLine: TimeLineService,
     private userStore: UserStoreService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toast: NgToastService
   ) {}
   dialogConfig = new MatDialogConfig();
   openAddTimelineItem() {
@@ -35,12 +39,16 @@ export class TimelineComponent {
     });
     _popup.afterClosed().subscribe((item) => {
       //console.log(item);
-      this.Timeline();
+      this.lodeTimeLine(localStorage.getItem('Pro_Id'));
     });
   }
-
+  addToggle() {
+    this.status = !this.status;
+    this.status == true ? (this.arrow = 'right') : (this.arrow = 'left');
+  }
   ngOnInit(): void {
     var ID = localStorage.getItem('Pro_Id');
+
     this.getUserData();
     this.lodeTimeLine(ID);
   }
@@ -74,6 +82,18 @@ export class TimelineComponent {
           this.projectCount = res.length;
         });
     }
-    this.lodeTimeLine(ID);
+  }
+  deleteTimeLineBox(id: any) {
+    this.timeLine.deleteTimeLineBox(id).subscribe((res) => {
+      // this.projects = res;
+      // console.log(this.projects);
+
+      this.toast.info({
+        detail: 'info',
+        summary: 'Project deleeted sucess',
+        duration: 5000,
+      });
+      this.lodeTimeLine(localStorage.getItem('Pro_Id'));
+    });
   }
 }
